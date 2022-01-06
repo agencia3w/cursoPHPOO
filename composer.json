@@ -1,0 +1,17 @@
+{
+    "name": "paulinho/phpoo",
+    "description": "Curso PHPOO",
+    "authors": [
+        {
+            "name": "Paulinho",
+            "email": "paulinho@agencia3w.com.br"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "app\\": "app"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {}
+}
