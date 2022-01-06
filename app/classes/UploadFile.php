@@ -14,6 +14,6 @@ class UploadFile extends Upload
 
     public function upload()
     {
-        return "Gerou o arquivo {$this->newName}";
+        return "Gerou o arquivo {$this->rename()}";
     }
 }
