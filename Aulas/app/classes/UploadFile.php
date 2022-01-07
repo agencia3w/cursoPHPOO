@@ -4,7 +4,7 @@ namespace app\classes;
 
 class UploadFile extends Upload
 {
-    public $extensions = ['zip', 'rar', 'pdf'];
+    protected $extensions = ['zip', 'rar', 'pdf'];
 
     public function __construct($file)
     {
