@@ -2,6 +2,6 @@
 
 namespace app\models;
 
-class Model
+abstract class Model
 {
 }
