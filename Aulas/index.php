@@ -2,40 +2,35 @@
 
 require "vendor/autoload.php";
 
-interface HeadInterface
+abstract class Banco
 {
-    public function create();
+    public function depositar($valor)
+    {
+        return "depositando com juros de 0.3 o valor de {$valor}";
+    }
 }
 
-class Head implements HeadInterface
+class Itau extends Banco
 {
-    public function create()
+
+    private $juros = 0.6;
+
+    public function depositar($valor)
     {
-        return 'Cabeça';
+        return "depositando com juros de {$this->juros} o valor de {$valor}";
     }
 }
 
-class HeadLoiro implements HeadInterface
+class Bradesco extends Banco
 {
-    public function create()
+    private $juros = 1;
+
+    public function depositar($valor)
     {
-        return 'Loiro';
+        return "depositando com juros de {$this->juros} o valor de {$valor}";
     }
 }
 
-class Person {
 
-    private $head;
-
-    public function __construct(HeadInterface $head)
-    {
-        $this->head = $head;
-    }
-
-    public function create(){
-        return $this->head->create();
-    }
-}
-
-$person = new Person(new HeadLoiro);
-echo $person->create();
+$itau = new Itau();
+echo $itau->depositar(100);
