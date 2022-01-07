@@ -4,25 +4,21 @@ require "vendor/autoload.php";
 
 class ShoppingCart
 {
-    private $get = [];
-    private $product;
+    private $products = [];
 
-    public function __set($name, $value)
+    public function __call($name, $params)
     {
-        if (!property_exists($this, $name)) {
-            $this->get[$name][] = $value;
-        }
-
-        throw new Exception("Essa propriedade já existe");
+        $this->products[] = $params;
     }
 
-    public function __get($name)
+    public function products()
     {
-        var_dump($this->get[$name]);
+        return $this->products;
     }
 }
 
 $shoppingCart = new ShoppingCart;
-$shoppingCart->product = 'Monitor';
-$shoppingCart->product = 'Mouse';
-$shoppingCart->product;
+$shoppingCart->add('Monitor');
+$shoppingCart->add('Mouse');
+$shoppingCart->add('Teclado');
+var_dump($shoppingCart->products());
