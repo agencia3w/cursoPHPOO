@@ -4,21 +4,11 @@ require "vendor/autoload.php";
 
 class ShoppingCart
 {
-    private $products = [];
-
-    public function __call($name, $params)
+    public function __toString()
     {
-        $this->products[] = $params;
-    }
-
-    public function products()
-    {
-        return $this->products;
+        return "Chamando o toString";
     }
 }
 
 $shoppingCart = new ShoppingCart;
-$shoppingCart->add('Monitor');
-$shoppingCart->add('Mouse');
-$shoppingCart->add('Teclado');
-var_dump($shoppingCart->products());
+echo $shoppingCart;
