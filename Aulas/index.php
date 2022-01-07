@@ -2,35 +2,46 @@
 
 require "vendor/autoload.php";
 
-use app\classes\UploadFoto;
-
-echo UploadFoto::CONSTATE_ESTATICA;
-echo UploadFoto::$propriedade_estatica;
-
-abstract class Email
+class Head
 {
-    public function teste()
+    public function create()
     {
-        return 'teste';
-    }
-
-    public static function who()
-    {
-        return 'Paulo';
-    }
-
-    public static function send()
-    {
-        return self::who(); //self retorna da classe que o método faz parte
-        // return static::who(); //statict retorna da classe onde foi executada
+        return 'Criando a cabeça';
     }
 }
 
-class SendEmail extends Email
+class Hand
 {
-    public static function who(){
-        return 'Neto';
+    public function create()
+    {
+        return 'Criando a mão';
     }
 }
 
-echo SendEmail::send();
+class Person
+{
+
+    private $head;
+
+    public function __construct()
+    {
+        $this->head = new Head; //é essencial E DEPENDE da outra para a classe existir então composição
+    }
+
+    // quando a classe depende da outra MAS não é essencial para a outra existir, então usa-se agregação
+    public function create(Hand $hand)
+    {
+        $this->head->create();
+        $hand->create();
+    }
+}
+
+$person = new Person;
+echo $person->create(new Hand);
+
+/**
+ * Quando usar herança, composição ou agregação
+ * Heranca: a classe é um...?
+ * Composição: a classe tem um ... e é essencial para existir
+ * Agregação: a classe tem um ... e não é essencial para existir
+ */
