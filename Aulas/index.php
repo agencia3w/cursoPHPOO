@@ -2,20 +2,40 @@
 
 require "vendor/autoload.php";
 
-interface LoginInterface
+interface HeadInterface
 {
-    public function login();
+    public function create();
 }
 
-abstract class Login{
-    abstract public function logar();
-}
-
-class LoginUser implements LoginInterface{
-    public function login()
+class Head implements HeadInterface
+{
+    public function create()
     {
-
+        return 'Cabeça';
     }
 }
 
-$login = new LoginUser;
+class HeadLoiro implements HeadInterface
+{
+    public function create()
+    {
+        return 'Loiro';
+    }
+}
+
+class Person {
+
+    private $head;
+
+    public function __construct(HeadInterface $head)
+    {
+        $this->head = $head;
+    }
+
+    public function create(){
+        return $this->head->create();
+    }
+}
+
+$person = new Person(new HeadLoiro);
+echo $person->create();
