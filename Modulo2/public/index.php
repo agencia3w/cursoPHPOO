@@ -1,6 +1,9 @@
 <?php
 
-require '../app/classes/Login.php';
+require '../vendor/autoload.php';
+
+use app\classes\Crud;
+use app\classes\Login;
 
 $login = new Login;
 $login->email = 'paulinho@agencia3w.com.br';
@@ -11,3 +14,6 @@ $user = ['name' => 'Paulinho', 'email' => 'paulinho@agencia3w.com.br'];
 
 $userObj = (object)$user;
 var_dump($userObj);
+
+$crud = new Crud;
+echo $crud->read();
