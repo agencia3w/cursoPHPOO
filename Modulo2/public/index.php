@@ -1,7 +1,8 @@
 <?php
 
-$stdClass = new stdClass;
-$stdClass->name = 'Paulinho';
-var_dump($stdClass);
+require '../Modulo2/vendor/autoload.php';
 
-// stdClass não tem métodos nem propriedades por padrão
+use app\classes\Teste;
+
+$teste = new Teste;
+echo $teste->andar();
