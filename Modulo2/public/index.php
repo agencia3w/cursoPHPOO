@@ -1,8 +1,11 @@
 <?php
 
-require '../Modulo2/vendor/autoload.php';
+use app\classes\Crud;
+use app\classes\Login;
 
-use app\classes\Teste;
+require '../vendor/autoload.php';
 
-$teste = new Teste;
-echo $teste->andar();
+$login = new Login;
+$login->email = 'teste@example.com';
+$login->password = 'pwd';
+echo $login->auth(new Crud);

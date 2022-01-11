@@ -4,10 +4,10 @@ namespace app\classes;
 
 class Login
 {
-    public $email;
-    public $password;
+    public string $email;
+    public string $password;
 
-    public function auth()
+    public function auth(Crud $crud): string
     {
         return 'O meu email é ' . $this->email . ' e minha senha é ' . $this->password;
     }
