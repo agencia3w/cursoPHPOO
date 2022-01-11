@@ -1,24 +1,12 @@
 <?php
 
-header('Content-type: application/json');
-
-use app\classes\Abajur;
-use app\classes\Book;
-use app\classes\Product;
+use app\models\Product;
+use app\models\User;
 
 require '../vendor/autoload.php';
 
-// $book = new Book;
-// $book->name = 'Meu Livro';
-// $book->description = 'Culpa duis duis in do cupidatat aliquip voluptate tempor.';
-// $book->pages = 300;
-// $book->author = 'Paulo Neto';
+$user = new User;
+echo $user->all();
 
-// echo json_encode($book);
-
-$abajur = new Abajur;
-$abajur->name = 'Abajur';
-$abajur->description = 'Et nisi nisi mollit enim ea adipisicing fugiat mollit ipsum quis ad voluptate commodo.';
-$abajur->isOn = true;
-
-echo json_encode($abajur);
+$product = new Product;
+echo $product->delete();
