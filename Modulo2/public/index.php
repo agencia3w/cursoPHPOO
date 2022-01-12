@@ -1,33 +1,20 @@
 <?php
 
-use app\classes\Person;
+declare(strict_types=1);
 
 require '../vendor/autoload.php';
 
 class User
 {
-    public string $name;
-    public int $age;
+    public static string $name;
 
-    public function __construct(string $name, int $age)
+    public static function userInfo()
     {
-        $this->name = $name;
-        $this->age = $age;
-    }
-
-    public function getUserInfo()
-    {
-        return $this->name . ', ' . $this->age;
+        return 'teste método estático';
     }
 }
 
-class User2 extends User
-{
-    public function __construct(string $name, int $age)
-    {
-        parent::__construct($name, $age);
-    }
-}
+User::$name = 'Paulinho';
 
-$user = new User2('Paulinho', 38);
-echo $user->getUserInfo();
+echo User::userInfo();
+echo User::$name;
