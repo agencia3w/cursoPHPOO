@@ -4,20 +4,26 @@ declare(strict_types=1);
 
 require '../vendor/autoload.php';
 
-class Person
+class User
 {
     public static function info()
     {
-        return 'Person info';
+        return __CLASS__;
     }
-}
 
-class User extends Person
-{
-    public function teste()
+    public static function teste()
     {
-        return parent::info();
+        var_dump('self '. self::info());
+        var_dump('static '.static::info());
     }
 }
 
-echo (new User)->teste();
+class User2 extends User
+{
+    public static function info()
+    {
+        return __CLASS__;
+    }
+}
+
+echo User2::teste();
