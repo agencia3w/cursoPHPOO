@@ -1,12 +1,9 @@
 <?php
 
-use app\models\Product;
-use app\models\User;
+use app\classes\Person;
 
 require '../vendor/autoload.php';
 
-$user = new User;
-echo $user->all();
+$person = new Person('Paulinho','paulinho@agencia3w.com.br');
 
-$product = new Product;
-echo $product->delete();
+echo $person->info();
