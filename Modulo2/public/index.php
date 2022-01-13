@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 require '../vendor/autoload.php';
 
-class Template
-{
-    const PATH = 'app/views';
+use app\classes\{Book, Crud, Login, User as ClassesUser};
+use app\models\{Product, User};
 
-    public function load()
-    {
-        return self::PATH;
-    }
-}
+$book = new Book;
 
-class Twig extends Template
-{
-    const PATH = 'app/views/twig';
-}
+$crud = new Crud;
+echo $crud->delete();
 
-echo (new Twig)->load();
+$login = new Login;
+
+$product = new Product;
+
+$userModel = new User;
+$user = new ClassesUser;

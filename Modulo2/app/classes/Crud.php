@@ -8,4 +8,9 @@ class Crud
     {
         return 'read';
     }
+
+    public function delete()
+    {
+        return 'delete';
+    }
 }
