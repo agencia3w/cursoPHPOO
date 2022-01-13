@@ -4,26 +4,19 @@ declare(strict_types=1);
 
 require '../vendor/autoload.php';
 
-class User
+class Template
 {
-    public static function info()
-    {
-        return __CLASS__;
-    }
+    const PATH = 'app/views';
 
-    public static function teste()
+    public function load()
     {
-        var_dump('self '. self::info());
-        var_dump('static '.static::info());
+        return self::PATH;
     }
 }
 
-class User2 extends User
+class Twig extends Template
 {
-    public static function info()
-    {
-        return __CLASS__;
-    }
+    const PATH = 'app/views/twig';
 }
 
-echo User2::teste();
+echo (new Twig)->load();
