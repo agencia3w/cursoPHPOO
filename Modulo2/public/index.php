@@ -1,20 +1,39 @@
 <?php
 
-declare(strict_types=1);
+class Product
+{
+    private $priceProduct;
+    private $discountProduct;
 
-require '../vendor/autoload.php';
+    public function setPriceProduct($priceProduct)
+    {
+        if (is_numeric($priceProduct) and $priceProduct > 0) {
+            $this->priceProduct = $priceProduct - $this->discountProduct;
+        } else {
+            throw new Exception('Passe um valor correto');
+        }
+    }
 
-use app\classes\{Book, Crud, Login, User as ClassesUser};
-use app\models\{Product, User};
+    public function getPriceProduct()
+    {
+        return $this->priceProduct;
+    }
 
-$book = new Book;
+    public function setDiscountProduct($discountProduct)
+    {
+        if (is_numeric($discountProduct) and $discountProduct > 0) {
+            $this->discountProduct = $discountProduct;
+        } else {
+            throw new Exception('Informe um desconto correto');
+        }
+    }
+}
 
-$crud = new Crud;
-echo $crud->delete();
-
-$login = new Login;
-
-$product = new Product;
-
-$userModel = new User;
-$user = new ClassesUser;
+try {
+    $product = new Product;
+    $product->setDiscountProduct(10);
+    $product->setPriceProduct(30);
+    echo $product->getPriceProduct();
+} catch (Exception $e) {
+    return $e->getMessage();
+}
