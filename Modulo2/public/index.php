@@ -1,39 +1,69 @@
 <?php
 
-class Product
+declare(strict_types=1);
+
+class Connection
 {
-    private $priceProduct;
-    private $discountProduct;
+    private static $connect = null;
 
-    public function setPriceProduct($priceProduct)
+    public static function connect()
     {
-        if (is_numeric($priceProduct) and $priceProduct > 0) {
-            $this->priceProduct = $priceProduct - $this->discountProduct;
-        } else {
-            throw new Exception('Passe um valor correto');
-        }
-    }
+        try {
+            if (!self::$connect) {
+                self::$connect = new PDO("mysql:host=localhost;dbname=radiomobile", "root", "", [
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
+                ]);
+            }
 
-    public function getPriceProduct()
-    {
-        return $this->priceProduct;
-    }
-
-    public function setDiscountProduct($discountProduct)
-    {
-        if (is_numeric($discountProduct) and $discountProduct > 0) {
-            $this->discountProduct = $discountProduct;
-        } else {
-            throw new Exception('Informe um desconto correto');
+            return self::$connect;
+        } catch (PDOException $e) {
+            var_dump($e->getMessage());
         }
     }
 }
 
-try {
-    $product = new Product;
-    $product->setDiscountProduct(10);
-    $product->setPriceProduct(30);
-    echo $product->getPriceProduct();
-} catch (Exception $e) {
-    return $e->getMessage();
+class Model
+{
+    protected $connection;
+
+    public function __construct()
+    {
+        $this->connection = Connection::connect();
+    }
+
+    protected function query($sql)
+    {
+        $query = $this->connection->query($sql);
+        $query->execute();
+        return $query;
+    }
+
+    protected function prepare($sql, $data)
+    {
+        $query = $this->connection->query($sql);
+        $query->execute($data);
+        return $query;
+    }
+
+    public function all()
+    {
+        $sql = "select * from {$this->table}";
+        $query = $this->query($sql);
+        return $query->fetchAll();
+    }
 }
+
+class User extends Model
+{
+    protected $table = 'clients';
+
+    public function usersWithIsAdmin()
+    {
+        $sql = "Select * from {$this->table} limit 1";
+        $query = $this->query($sql);
+        return $query->fetchAll();
+    }
+}
+
+$user = new User;
+var_dump($user->usersWithIsAdmin());
