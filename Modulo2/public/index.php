@@ -2,10 +2,26 @@
 
 declare(strict_types=1);
 
+/**
+ * Classe de conexão PDO
+ * 
+ * @package classes
+ * @author Paulinho <paulinho@agencia3w.com.br>
+ */
 class Connection
 {
+    /**
+     * Propriedade que estabelece a conexão
+     *
+     * @var object
+     */
     private static $connect = null;
 
+    /**
+     * Método para estabelecer uma conexão PDO
+     *
+     * @return object
+     */
     public static function connect()
     {
         try {
@@ -31,7 +47,13 @@ class Model
         $this->connection = Connection::connect();
     }
 
-    protected function query($sql)
+    /**
+     * Consulta a ser executada no banco de dados
+     *
+     * @param string $sql
+     * @return void
+     */
+    protected function query(string $sql)
     {
         $query = $this->connection->query($sql);
         $query->execute();
