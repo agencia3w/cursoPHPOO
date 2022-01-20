@@ -2,38 +2,26 @@
 
 declare(strict_types=1);
 
-interface CartInterface
+abstract class Checkout
 {
-    public function add($product): void;
-    public function remove($product): void;
-    public function quantity($quantity, $product): void;
-    public function clear(): void;
-    public function cart(): array;
+    abstract function pay($payment): array;
 }
 
-class CartShop implements CartInterface
+class PaypalCheckout extends Checkout
 {
-    public function add($product): void
-    {
-    }
-
-    public function remove($product): void
-    {
-    }
-
-    public function quantity($quantity, $product): void
-    {
-    }
-
-    public function clear(): void
-    {
-    }
-
-    public function cart(): array
+    public function pay($payment): array
     {
         return [];
     }
 }
 
-$cart = new CartShop;
-$cart->add('monitor');
+class PagseguroCheckout extends Checkout
+{
+    public function pay($payment): array
+    {
+        return [];
+    }
+}
+
+$paypal = new PaypalCheckout();
+$paypal->pay([]);
