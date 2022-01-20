@@ -2,40 +2,21 @@
 
 declare(strict_types=1);
 
-abstract class Model
+class Teste
 {
-    public string $entity;
-
-    public function all()
+    public function t(): string
     {
-        return 'all ' . $this->entity;
-    }
-
-    public function update()
-    {
-        return 'update ' . $this->entity;
-    }
-
-    public function delete()
-    {
-        return 'delete ' . $this->entity;
-    }
-
-    abstract function setEntity(string $entity);
-}
-
-class User extends Model{
-    function setEntity(string $entity){
-        $this->entity = $entity;
+        return 'teste na classe pai';
     }
 }
 
-class Post extends Model{
-    function setEntity(string $entity){
-        $this->entity = $entity;
+class TesteSub extends Teste
+{
+    public function t(): string
+    {
+        return 'teste na classe filha';
     }
 }
 
-$user = new User;
-$user->setEntity('users');
-echo $user->all();
+$teste = new TesteSub();
+echo $teste->t();
