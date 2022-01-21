@@ -2,27 +2,16 @@
 
 declare(strict_types=1);
 
-class ActiveRecord
+$obj = new class('Paulinho')
 {
-    public array $data = [];
-
-    public function __set($name, $value)
+    public function __construct($name)
     {
-        $this->data[$name] = $value;
     }
 
-    public function __get($name){
-        if(array_key_exists($name, $this->data)){
-            return $this->data[$name];
-        }
+    public function getName()
+    {
+        return $this->name;
     }
+};
 
-    public function __call($name, $arguments){
-        var_dump($name, $arguments);
-    }
-}
-
-$activeRecord = new ActiveRecord;
-// $activeRecord->firstName = 'Paulinho';
-// echo $activeRecord->firstName;
-$activeRecord->create('users', 40);
+var_dump($obj->getName());
