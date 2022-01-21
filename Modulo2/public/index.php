@@ -2,26 +2,39 @@
 
 declare(strict_types=1);
 
-abstract class Checkout
+class CartShop
 {
-    abstract function pay($payment): array;
-}
-
-class PaypalCheckout extends Checkout
-{
-    public function pay($payment): array
+    public function add($product): void
     {
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
+        }
+
+        !isset($_SESSION['cart'][$product]) ?
+            $_SESSION['cart'][$product] = 1 :
+            $_SESSION['cart'][$product] += 1;
+    }
+
+    public function clear(): void
+    {
+        if (count($this->cart()) > 0) {
+            unset($_SESSION['cart']);
+        }
+    }
+
+    public function cart(): array
+    {
+        if (isset($_SESSION['cart'])) {
+            return $_SESSION['cart'];
+        }
+
         return [];
     }
 }
 
-class PagseguroCheckout extends Checkout
-{
-    public function pay($payment): array
-    {
-        return [];
-    }
-}
+$cart = new CartShop;
+$cart->add('product');
+$cart->clear();
 
-$paypal = new PaypalCheckout();
-$paypal->pay([]);
+
+var_dump($cart->cart());
