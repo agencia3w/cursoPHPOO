@@ -2,57 +2,39 @@
 
 declare(strict_types=1);
 
+trait validaCpf
+{
+    public function validaCpf()
+    {
+        return 'validar cpf';
+    }
+}
+
 trait StringUtils
 {
-    public function createSlug(string $string)
+    public function slug()
     {
-        return strtolower(str_replace(' ', '-', $string));
-    }
-
-    public function removeAccent()
-    {
-        return 'remove acentos';
+        return 'slug';
     }
 }
 
-class Post
+abstract class Checkout
 {
-    use StringUtils;
-
-    private string $title;
-
-    public function setTitle(string $title)
-    {
-        $this->title = $this->createSlug($title);
-    }
-
-    public function getTitle()
-    {
-        return $this->title;
-    }
+    abstract public function pay();
 }
 
-class ForumPost
+class PagseguroCheckout extends Checkout
 {
-    use StringUtils;
-
-    private string $title;
-
-    public function setTitle(string $title)
+    use validaCpf, StringUtils;
+    public function pay()
     {
-        $this->title = $this->createSlug($title);
-    }
-
-    public function getTitle()
-    {
-        return $this->title;
     }
 }
 
-$post = new Post;
-$post->setTitle('Meu post');
-echo $post->getTitle();
-
-$forumpost = new ForumPost;
-$forumpost->setTitle('Meu post no fórum');
-echo $forumpost->getTitle();
+class PaypalCheckout extends Checkout
+{
+    use validaCpf;
+    public function pay()
+    {
+    }
+}
