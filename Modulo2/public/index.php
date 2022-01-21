@@ -2,39 +2,33 @@
 
 declare(strict_types=1);
 
-class CartShop
+class Estoque
 {
-    public function add($product): void
-    {
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = [];
-        }
+    private int $estoque;
 
-        !isset($_SESSION['cart'][$product]) ?
-            $_SESSION['cart'][$product] = 1 :
-            $_SESSION['cart'][$product] += 1;
+    public function setEstoque($estoque)
+    {
+        $this->estoque = $estoque;
     }
 
-    public function clear(): void
+    public function getEstoque()
     {
-        if (count($this->cart()) > 0) {
-            unset($_SESSION['cart']);
-        }
+        return $this->estoque;
     }
 
-    public function cart(): array
-    {
-        if (isset($_SESSION['cart'])) {
-            return $_SESSION['cart'];
+    public function tirarEstoque($quantidade){
+        if($quantidade > $this->estoque){
+            throw new Exception("O valor informado é maior que o estoque disponível");
+        }
+        if($quantidade < 0){
+            throw new Exception("Não pode ser informado um valor negativo.");
         }
 
-        return [];
+        $this->estoque -= $quantidade;
     }
 }
 
-$cart = new CartShop;
-$cart->add('product');
-$cart->clear();
-
-
-var_dump($cart->cart());
+$estoque = new Estoque;
+$estoque->setEstoque(100);
+$estoque->tirarEstoque(50);
+var_dump($estoque->getEstoque());
