@@ -2,16 +2,57 @@
 
 declare(strict_types=1);
 
-$obj = new class('Paulinho')
+trait StringUtils
 {
-    public function __construct($name)
+    public function createSlug(string $string)
     {
+        return strtolower(str_replace(' ', '-', $string));
     }
 
-    public function getName()
+    public function removeAccent()
     {
-        return $this->name;
+        return 'remove acentos';
     }
-};
+}
 
-var_dump($obj->getName());
+class Post
+{
+    use StringUtils;
+
+    private string $title;
+
+    public function setTitle(string $title)
+    {
+        $this->title = $this->createSlug($title);
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+}
+
+class ForumPost
+{
+    use StringUtils;
+
+    private string $title;
+
+    public function setTitle(string $title)
+    {
+        $this->title = $this->createSlug($title);
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+}
+
+$post = new Post;
+$post->setTitle('Meu post');
+echo $post->getTitle();
+
+$forumpost = new ForumPost;
+$forumpost->setTitle('Meu post no fórum');
+echo $forumpost->getTitle();
