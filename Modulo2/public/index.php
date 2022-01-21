@@ -2,33 +2,27 @@
 
 declare(strict_types=1);
 
-class Estoque
+class ActiveRecord
 {
-    private int $estoque;
+    public array $data = [];
 
-    public function setEstoque($estoque)
+    public function __set($name, $value)
     {
-        $this->estoque = $estoque;
+        $this->data[$name] = $value;
     }
 
-    public function getEstoque()
-    {
-        return $this->estoque;
+    public function __get($name){
+        if(array_key_exists($name, $this->data)){
+            return $this->data[$name];
+        }
     }
 
-    public function tirarEstoque($quantidade){
-        if($quantidade > $this->estoque){
-            throw new Exception("O valor informado é maior que o estoque disponível");
-        }
-        if($quantidade < 0){
-            throw new Exception("Não pode ser informado um valor negativo.");
-        }
-
-        $this->estoque -= $quantidade;
+    public function __call($name, $arguments){
+        var_dump($name, $arguments);
     }
 }
 
-$estoque = new Estoque;
-$estoque->setEstoque(100);
-$estoque->tirarEstoque(50);
-var_dump($estoque->getEstoque());
+$activeRecord = new ActiveRecord;
+// $activeRecord->firstName = 'Paulinho';
+// echo $activeRecord->firstName;
+$activeRecord->create('users', 40);
