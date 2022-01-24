@@ -2,42 +2,41 @@
 
 declare(strict_types=1);
 
-class Address{
-    public string $street;
-    public string $city;
+class User
+{
+    private string $firstName;
+    private string $lastName;
+    private string $email;
 
-    public function __clone()
+    public function setFirstName($firstName)
     {
-        var_dump('executou o clone da classe Address');
+        $this->firstName = $firstName;
+    }
+
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    public function __invoke()
+    {
+        return 'invoke';
+    }
+
+    public function __toString()
+    {
+        return "Olá, meu nome é {$this->firstName} {$this->lastName} e email {$this->email}";
     }
 }
 
-class User{
-    public string $name = 'Paulo';
-    public int $age = 38;
-    public Address $address;
-
-    public function __construct(Address $address)
-    {
-        $this->address = $address;
-    }
-
-    public function __clone()
-    {
-        var_dump('executou o clone');
-        $this->address = clone $this->address;
-        $this->age = 40;
-    }
-}
-
-$address = new Address;
-$address->city = 'Feira';
-$address->street = 'Rua';
-$user = new User($address);
-
-$user1 = clone $user;
-
-$user1->name = 'Paulinho';
-
-var_dump($user);
-var_dump($user1);
+$user = new User;
+$user->setFirstName('Paulo');
+$user->setLastName('Neto');
+$user->setEmail('paulinho@agencia3w.com.br');
+echo $user;
+echo $user();
