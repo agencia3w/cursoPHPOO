@@ -2,39 +2,42 @@
 
 declare(strict_types=1);
 
-trait validaCpf
-{
-    public function validaCpf()
+class Address{
+    public string $street;
+    public string $city;
+
+    public function __clone()
     {
-        return 'validar cpf';
+        var_dump('executou o clone da classe Address');
     }
 }
 
-trait StringUtils
-{
-    public function slug()
+class User{
+    public string $name = 'Paulo';
+    public int $age = 38;
+    public Address $address;
+
+    public function __construct(Address $address)
     {
-        return 'slug';
+        $this->address = $address;
+    }
+
+    public function __clone()
+    {
+        var_dump('executou o clone');
+        $this->address = clone $this->address;
+        $this->age = 40;
     }
 }
 
-abstract class Checkout
-{
-    abstract public function pay();
-}
+$address = new Address;
+$address->city = 'Feira';
+$address->street = 'Rua';
+$user = new User($address);
 
-class PagseguroCheckout extends Checkout
-{
-    use validaCpf, StringUtils;
-    public function pay()
-    {
-    }
-}
+$user1 = clone $user;
 
-class PaypalCheckout extends Checkout
-{
-    use validaCpf;
-    public function pay()
-    {
-    }
-}
+$user1->name = 'Paulinho';
+
+var_dump($user);
+var_dump($user1);
