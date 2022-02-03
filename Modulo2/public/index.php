@@ -2,41 +2,39 @@
 
 declare(strict_types=1);
 
-class User
+class Fornecedor
 {
-    private string $firstName;
-    private string $lastName;
-    private string $email;
+    private string $name;
+    private string $local;
 
-    public function setFirstName($firstName)
+    public function setName($name)
     {
-        $this->firstName = $firstName;
+        $this->name = $name;
     }
 
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
+    public function getName(){
+        return $this->name;
     }
 
-    public function setEmail($email)
-    {
-        $this->email = $email;
+    public function setLocal($local){
+        $this->local = $local;
     }
 
-    public function __invoke()
-    {
-        return 'invoke';
-    }
-
-    public function __toString()
-    {
-        return "Olá, meu nome é {$this->firstName} {$this->lastName} e email {$this->email}";
+    public function getLocal(){
+        return $this->local;
     }
 }
 
-$user = new User;
-$user->setFirstName('Paulo');
-$user->setLastName('Neto');
-$user->setEmail('paulinho@agencia3w.com.br');
-echo $user;
-echo $user();
+class Produto
+{
+    public Fornecedor $fornecedor;
+}
+
+$fornecedor = new Fornecedor;
+$fornecedor->setName('Agencia3w');
+$fornecedor->setLocal('Feira');
+
+$produto = new Produto();
+$produto->fornecedor = $fornecedor;
+
+var_dump($produto);
