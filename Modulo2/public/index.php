@@ -2,39 +2,26 @@
 
 declare(strict_types=1);
 
-class Fornecedor
+class Checkout
 {
-    private string $name;
-    private string $local;
-
-    public function setName($name)
+    protected $log;
+    public function __construct(Log $log)
     {
-        $this->name = $name;
+        $this->log = $log;
     }
 
-    public function getName(){
-        return $this->name;
-    }
-
-    public function setLocal($local){
-        $this->local = $local;
-    }
-
-    public function getLocal(){
-        return $this->local;
+    public function pay(){
+        return 'fez pagamento e gerou log: ' . $this->log->create();
     }
 }
 
-class Produto
+class Log
 {
-    public Fornecedor $fornecedor;
+    public function create()
+    {
+        return 'create log';
+    }
 }
 
-$fornecedor = new Fornecedor;
-$fornecedor->setName('Agencia3w');
-$fornecedor->setLocal('Feira');
-
-$produto = new Produto();
-$produto->fornecedor = $fornecedor;
-
-var_dump($produto);
+$checkout = new Checkout(new Log);
+echo $checkout->pay();
