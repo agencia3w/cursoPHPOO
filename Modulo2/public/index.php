@@ -2,26 +2,48 @@
 
 declare(strict_types=1);
 
-class Checkout
+class Login
 {
-    protected $log;
-    public function __construct(Log $log)
+    private User $user;
+    public function __construct(User $user)
     {
-        $this->log = $log;
+        $this->user = $user;
     }
 
-    public function pay(){
-        return 'fez pagamento e gerou log: ' . $this->log->create();
+    public function login(string $email, string $password)
+    {
+        $validate = new ValidateData;
+        $valid = $validate->validate([
+            'firstName' => 'required',
+            'email' => 'required'
+        ]);
+
+        if(!$valid){
+
+        }
+
+        return 'fazendo login';
     }
 }
 
-class Log
+abstract class Model
 {
-    public function create()
+    public function find(string $field, string $value)
     {
-        return 'create log';
+        return 'find';
     }
 }
 
-$checkout = new Checkout(new Log);
-echo $checkout->pay();
+class User
+{
+}
+
+class ValidateData
+{
+    public function validate(array $data)
+    {
+    }
+}
+
+$login = new Login(new User);
+echo $login->login('paulinho@agencia3w.com.br', '2222');
