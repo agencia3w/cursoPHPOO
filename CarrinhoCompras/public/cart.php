@@ -6,8 +6,8 @@ use app\classes\CartProducts;
 session_start();
 require '../vendor/autoload.php';
 
-$cartProducts = new CartProducts(new Cart);
-$products = $cartProducts->products();
+$cartProducts = new CartProducts();
+$products = $cartProducts->products(new Cart);
 
 ?>
 <!DOCTYPE html>
