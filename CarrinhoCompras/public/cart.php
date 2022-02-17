@@ -17,6 +17,7 @@ $products = $cartProducts->products();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <title>Cart</title>
 </head>
 
@@ -31,22 +32,23 @@ $products = $cartProducts->products();
             <ul>
                 <?php foreach($products['products'] as $product): ?>
                     <li class="cart-product">
-                        <?php echo $product['product'] ?>
+                        <b><?php echo $product['product'] ?></b>
                         <form action="quantidade.php" method="get">
                             <input type="text" name="qty" id="cart-input-qty" value="<?php echo $product['qty'] ?>">
                             <input type="hidden" name="id" value="<?php echo $product['id'] ?>">
                         </form> x R$ <?php echo number_format($product['price'],'2',',','.'); ?> | <?php echo number_format($product['subtotal'],'2',',','.'); ?>
-                        <a href="remover.php?id=<?php echo $product['id'] ?>" id="cart-remove">Remover</a>
+                        <a href="remover.php?id=<?php echo $product['id'] ?>" class="right btn">Remover</a>
                     </li>
                 <?php endforeach?>
             </ul>
 
+            <hr>
             <div id="cart-total-clear">
                 <span id="cart-total">
                     Total: R$ <?php echo number_format($products['total'],'2',',','.'); ?>
                 </span>
                 <span id="cart-clear">
-                    <a href="clear.php">Limpar Carrinho</a>
+                    <a href="clear.php" class="btn">Limpar Carrinho</a>
                 </span>
             </div>
         <?php endif; ?>

@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li{
+    background: #f2f2f2;
+    margin-bottom: 3px;
+    padding: 14px 20px;
+    border-radius: 5px;
+}
+
+a{
+    text-decoration: none;
+}
+
+form{
+    display: inline;
+}
+
+.right{
+    float: right;
+}
+
+.btn{
+    background: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#cart-input-qty{
+    width: 40px;
+    text-align: center;
+}
