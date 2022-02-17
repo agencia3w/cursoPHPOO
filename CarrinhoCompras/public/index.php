@@ -27,7 +27,10 @@ $productsInCart = $cart->cart();
         <h3>Cart: <?php echo count($productsInCart); ?> | <a href="cart.php">Go to Cart</a></h3>
         <ul>
             <?php foreach ($products as $index => $product) : ?>
-                <li><?php echo $product['name'] ?> | <?php echo number_format($product['price'], 2, ',', '.'); ?></li> <a href="add.php?id=<?php echo $index; ?>">Add</a>
+                <li>
+                    <?php echo $product['name'] ?> | <?php echo number_format($product['price'], 2, ',', '.'); ?> | 
+                    <a href="add.php?id=<?php echo $index; ?>">Adicionar</a>
+                </li>
             <?php endforeach ?>
         </ul>
     </div>
