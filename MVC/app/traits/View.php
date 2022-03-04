@@ -10,8 +10,11 @@ trait View
     private function Twig()
     {
         $twig = new Twig;
+
         $loadTwig = $twig->loadTwig();
+
         $twig->loadExtensions();
+        $twig->loadFunctions();
 
         return $loadTwig;
     }
