@@ -6,12 +6,9 @@ use core\Controller;
 use core\Method;
 use core\Parameters;
 
-// dd(app\classes\Uri::uri());
-
 try {
     $controller = new Controller;
     $controller = $controller->load();
-    // dd($controller);
 
     $method = new Method;
     $method = $method->load($controller);
@@ -20,7 +17,6 @@ try {
     $parameters = $parameters->load();
 
     $controller->$method($parameters);
-
 
 } catch (\Exception $e) {
     dd($e->getMessage());
