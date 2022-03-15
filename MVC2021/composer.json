@@ -1,0 +1,22 @@
+{
+    "name": "paulinho/mvc2021",
+    "description": "MVC 2021",
+    "authors": [
+        {
+            "name": "Paulinho",
+            "email": "paulinho@agencia3w.com.br"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "app\\": "app"
+        },
+        "files": [
+            "app/helpers/constants.php",
+            "app/helpers/redirect.php",
+            "app/helpers/session.php",
+            "app/helpers/flash.php"
+        ]
+    }
+}
