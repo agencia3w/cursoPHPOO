@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\site;
 
 use app\models\activerecord\FindBy;
 use app\models\User as ModelsUser;
@@ -9,6 +9,7 @@ class User
 {
     public string $view;
     public array $data = [];
+    public string $master = 'index.php';
 
     public function show($args)
     {

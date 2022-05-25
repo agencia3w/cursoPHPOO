@@ -10,18 +10,27 @@ class ControllerExtract
     {
         $uri = Uri::uri();
 
-        $controller = 'Home';
-
-        if (isset($uri[0]) && $uri[0] != '') {
-            $controller = ucfirst($uri[0]);
+        $folder = FolderExtract::extract($uri);
+        
+        if ($folder) {
+            $controller = Uri::uriExist($uri, 1);
+            $namespaceAndController = "app\\controllers\\".$folder."\\";
+        } else {
+            $controller = Uri::uriExist($uri, 0);
+            $namespaceAndController = "app\\controllers\\".CONTROLLER_FOLDER_DEFAULT."\\";
         }
 
-        $namespaceAndController = "app\\controllers\\" . $controller;
-
-        if (class_exists($namespaceAndController)) {
-            $controller = $namespaceAndController;
+        if (!$controller) {
+            $controller = CONTROLLER_DEFAULT;
         }
 
-        return $controller;
+        $controller = $namespaceAndController.$controller;
+
+        if (class_exists($controller)) {
+            return $controller;
+        }
+
+        throw new \Exception("Controller {$controller} não existe");
+        
     }
 }

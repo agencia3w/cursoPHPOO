@@ -29,6 +29,10 @@ class MyApp
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if (!isset($this->controller->data)) {
                 throw new \Exception("A propriedade data é obrigatória");
+            
+            }
+            if (!isset($this->controller->master)) {
+                throw new \Exception("A propriedade master é obrigatória");
             }
 
             if (!array_key_exists('title', $this->controller->data)) {
@@ -36,7 +40,7 @@ class MyApp
             }
 
             extract($this->controller->data);
-            require '../app/views/index.php';
+            require '../app/views/'. $this->controller->master;
         }
     }
 }
